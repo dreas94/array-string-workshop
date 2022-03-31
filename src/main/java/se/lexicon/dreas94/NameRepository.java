@@ -47,6 +47,7 @@ public class NameRepository
 
         names = Arrays.copyOf(names, names.length + 1);
         names[names.length - 1] = fullName;
+        sortNames();
 
         return true;
     }
