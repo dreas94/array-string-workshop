@@ -49,7 +49,7 @@ public class App
     private static void clearNameRepository()
     {
         NameRepository.clear();
-        System.out.println("Name Repository has been cleared of all values");
+        System.out.println("Name Repository has been cleared of all values\n");
     }
 
     private static void addNameToNameRepository(final String fullName)
