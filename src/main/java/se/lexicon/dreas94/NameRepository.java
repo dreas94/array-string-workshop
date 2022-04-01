@@ -40,6 +40,37 @@ public class NameRepository
         return foundNames;
     }
 
+    private static int findByBinarySearchFullName(final String fullName)
+    {
+        if(getSize() == 0)
+            return -1;
+
+        return Arrays.binarySearch(names,fullName);
+    }
+
+    public static Boolean removeElementFromRepository(int index)
+    {
+        if (names == null || index < 0 || index >= names.length)
+        {
+            return false;
+        }
+
+        String[] tempNames = new String[names.length - 1];
+
+        for (int i = 0, k = 0; i < names.length; i++)
+        {
+            if (i == index)
+            {
+                continue;
+            }
+
+            tempNames[k++] = names[i];
+        }
+
+        names = Arrays.copyOf(tempNames, tempNames.length);
+        return true;
+    }
+
     public static int getSize()
     {
         return names.length;
@@ -63,15 +94,15 @@ public class NameRepository
 
     public static String find(final String fullName)
     {
-        if(getSize() == 0 || Arrays.binarySearch(names,fullName) < 0)
-            return fullName;
+        if(findByBinarySearchFullName(fullName) < 0)
+            return null;
 
-        return null;
+        return fullName;
     }
 
     public static boolean add(final String fullName)
     {
-        if(find(fullName) == null)
+        if(find(fullName) != null)
             return false;
 
         names = genericArrayAdd(names, fullName);
@@ -92,16 +123,24 @@ public class NameRepository
 
     public static boolean update(final String original, final String updatedName)
     {
-        if(getSize() == 0)
-            return false;
-
-        int index = Arrays.binarySearch(names,original);
-
-        if(index < 0 || find(updatedName) == null)
+        int index = findByBinarySearchFullName(original);
+        if(index < 0 || findByBinarySearchFullName(updatedName) >= 0)
             return false;
 
         names[index] = updatedName;
 
+        sortNames();
+
         return true;
+    }
+
+    public static boolean remove(final String fullName)
+    {
+        int index = findByBinarySearchFullName(fullName);
+
+        if(index < 0)
+            return false;
+
+        return removeElementFromRepository(index);
     }
 }
