@@ -13,7 +13,7 @@ public class App
         String[] names = new String[] {"Erik Svensson", "Andreas Eriksson", "Mehrdad Javan"};
         NameRepository.setNames(names);
         printAboutNameRepository();
-
+        clearNameRepository();
         printAboutNameRepository();
 
         addNameToNameRepository("Leo Yoosefi");
