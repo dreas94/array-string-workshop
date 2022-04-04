@@ -35,28 +35,62 @@ public class NameRepositoryTest
     }
 
     @Test
-    public void clear() {
-        // todo: implement the method
+    public void clear()
+    {
+        NameRepository.clear();
+        int expectedSize = 0;
+        assertEquals(NameRepository.getSize(), expectedSize);
     }
 
     @Test
-    public void findAll() {
-        // todo: implement the method
+    public void findAll()
+    {
+        NameRepository.clear();
+        String[] data = {"Erik Svensson", "Ulf Bengtsson"};
+
+        NameRepository.setNames(data);
+
+        assertArrayEquals(NameRepository.findAll(), data);
     }
 
     @Test
-    public void find() {
-        // todo: implement the method
+    public void find()
+    {
+        NameRepository.clear();
+        String[] data = new String[] {"Erik Svensson", "Andreas Eriksson", "Mehrdad Javan", "Ulf Bengtsson"};
+
+        NameRepository.setNames(data);
+
+        String name = data[3];
+
+        assertEquals(NameRepository.find(name), name);
     }
 
     @Test
-    public void add() {
-        // todo: implement the method
+    public void add()
+    {
+        NameRepository.clear();
+        String[] data = new String[] {"Erik Svensson", "Andreas Eriksson", "Mehrdad Javan", "Ulf Bengtsson"};
+
+        NameRepository.setNames(data);
+
+        String name = "Tabea Teufel";
+
+        assertTrue(NameRepository.add(name));
+        assertEquals(NameRepository.find(name), name);
     }
 
     @Test
-    public void add_false(){
-        // todo: implement the method
+    public void add_false()
+    {
+        NameRepository.clear();
+        String[] data = new String[] {"Erik Svensson", "Andreas Eriksson", "Mehrdad Javan", "Ulf Bengtsson"};
+
+        NameRepository.setNames(data);
+
+        String name = "Andreas Eriksson";
+
+        assertFalse(NameRepository.add(name));
     }
 
     // add other methods
